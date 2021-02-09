@@ -18,6 +18,11 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   loadMap() {
+    GoogleMaps.getPlugin().environment.setEnv({
+      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyCH3ILcHPLgysmK8T65TPrEkbgPtfDNnXg',
+      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyCH3ILcHPLgysmK8T65TPrEkbgPtfDNnXg' 
+    });
+
     const map = GoogleMaps.create('map_canvas');
     map.one( GoogleMapsEvent.MAP_READY ).then((data: any) => {
 			const coordinates: LatLng = new LatLng(43.6600980666535, 3.035913988993468);
