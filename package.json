@@ -22,6 +22,7 @@
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/google-maps": "^5.5.0",
     "@ionic/angular": "^5.5.2",
+    "cordova-android": "9.0.0",
     "cordova-browser": "6.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -33,7 +34,7 @@
     "@angular/compiler": "~11.0.5",
     "@angular/compiler-cli": "~11.0.5",
     "@angular/language-service": "~11.0.5",
-    "@ionic/angular-toolkit": "^2.3.3",
+    "@ionic/angular-toolkit": "^3.0.0",
     "@ionic/lab": "3.2.10",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
@@ -62,16 +63,21 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-googlemaps": {},
+      "cordova-plugin-googlemaps": {
+        "API_KEY": "AIzaSyCH3ILcHPLgysmK8T65TPrEkbgPtfDNnXg"
+      },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
