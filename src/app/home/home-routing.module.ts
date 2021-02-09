@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: MapComponent
+  },
+  {
+      path: 'map',
+      component : MapComponent
   }
 ];
 
@@ -14,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FolderPageRoutingModule {}
+export class HomePageRoutingModule {}
