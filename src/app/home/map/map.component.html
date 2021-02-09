@@ -1,3 +1,59 @@
-<p>
-  map works!
-</p>
+<!-- Nav bar on -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Thrailers</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- Nav bar off -->
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+      <ion-toolbar>
+          <ion-title size="large">Thrailers 2.0</ion-title>
+      </ion-toolbar>
+  </ion-header>
+
+  <div class="trailers-page">
+
+    <h1> Coucou </h1>
+    <div id="map_canvas"></div>
+
+ <!--     <h2>Les affiches du mois</h2>
+      <div class="featured-container">
+          <div class="scroll" scrollX="true">
+              <ion-card class="featured-card" *ngFor="let trailer of trailersDuMois" (click)="navigate(trailer)">
+                  <img [src]="trailer.poster">
+                  <ion-card-header>  
+                      <ion-card-subtitle>{{trailer.genre[0]}}</ion-card-subtitle>                     
+                      <ion-card-title>{{trailer.title}}</ion-card-title>
+                      
+                  </ion-card-header>
+
+                  <ion-card-content class="ion-text-wrap">
+                      {{trailer.releasedate | date:'mediumDate'}}
+                  </ion-card-content>
+              </ion-card>
+
+
+          </div>
+      </div>
+      <h2>Tous les films</h2>
+      <ion-list>
+          <ion-item *ngFor="let trailer of trailers" (click)="navigate(trailer)">
+              <ion-avatar slot="start">
+                  <img [src]="trailer.poster">
+              </ion-avatar>
+              <ion-label>
+                  <h2>{{trailer.title}}</h2>
+                  <h3>{{trailer.genre[0]}}</h3>
+                  <p>{{trailer.releasedate | date:'mediumDate'}}</p>
+              </ion-label>
+          </ion-item>
+          
+      </ion-list> -->
+
+  </div>
+</ion-content>

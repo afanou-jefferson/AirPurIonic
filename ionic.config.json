@@ -1,5 +1,7 @@
 {
   "name": "AirPurIonic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
