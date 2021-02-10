@@ -16,9 +16,9 @@
 
 
     <!-- <IonButton color="primary" (click)="addMarker()">Primary</IonButton> -->
-    <div id="map_canvas">TEST</div>
+    <div id="map_canvas"></div>
 
-    <ion-button expand="block" (click)="addMarkerLieu()">Ajout de Markeur</ion-button>
+    <!-- <ion-button expand="block" (click)="addMarkerLieu()">Ajout de Markeur</ion-button> -->
     <div class="butonOption">
         <ion-fab vertical="bottom" horizontal="start" slot="fixed">
             <ion-fab-button color="sucess" (click)="mapOptions()">
@@ -27,27 +27,40 @@
         </ion-fab>
     </div>
 
-<!-- Tableau pour afficher les données -->
-    <ion-card>
+    <!-- Tableau pour afficher les données -->
+    <ion-card *ngIf="isMarkerClicked">
+        <ion-list-header>
+            <ion-label><b>Nom Polluant</b></ion-label>
+            <ion-label><b>Valeur</b></ion-label>
+            <ion-label><b>Date début Relevé</b></ion-label>
+            <ion-label><b>Date fin Relevé</b></ion-label>
+        </ion-list-header>
         <ion-list>
-            <ion-item>
-                <ion-label>The Legend of Zelda</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Pac-Man</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Super Mario World</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>The Legend of Zelda</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Pac-Man</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>Super Mario World</ion-label>
+            <ion-item *ngFor="let polluant of this.polluantsStationClicked">
+                <ion-label>{{polluant.nom}}</ion-label>
+                <ion-label>{{polluant.valeur}}</ion-label>
+                <ion-label>{{polluant.dateDebut}}</ion-label>
+                <ion-label>{{polluant.dateFin}}</ion-label>
             </ion-item>
         </ion-list>
     </ion-card>
 </ion-content>
+
+<div class="my-overlay" padding [hidden]="overlayHidden">
+    <ion-card *ngIf="isMarkerClicked">
+        <ion-list-header>
+            <ion-label><b>Nom Polluant</b></ion-label>
+            <ion-label><b>Valeur</b></ion-label>
+            <ion-label><b>Date début Relevé</b></ion-label>
+            <ion-label><b>Date fin Relevé</b></ion-label>
+        </ion-list-header>
+        <ion-list>
+            <ion-item *ngFor="let polluant of this.polluantsStationClicked">
+                <ion-label>{{polluant.nom}}</ion-label>
+                <ion-label>{{polluant.valeur}}</ion-label>
+                <ion-label>{{polluant.dateDebut}}</ion-label>
+                <ion-label>{{polluant.dateFin}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</div>

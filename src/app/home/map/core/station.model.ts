@@ -7,7 +7,7 @@ export class Station {
    public longitude: number;
    public nomCommune: String;
    public communeId : number;
-   public polluant: Polluant[];
+   public polluants: Polluant[];
 
    constructor(params: any) {
       Object.assign(this, params);

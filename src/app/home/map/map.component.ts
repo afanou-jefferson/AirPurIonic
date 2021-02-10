@@ -5,6 +5,7 @@ import { MapService } from './core/map.service';
 import { Station } from './core/station.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Polluant } from './core/polluant.model'
 
 @Component({
   selector: 'app-map',
@@ -22,13 +23,19 @@ export class MapComponent implements OnInit, AfterViewInit {
   // ];
 
   // Depuis Jeff
-  stations: Station[] = [];
+  public stations: Station[] = [];
   markers: any[] = [];
-
+  isMarkerClicked: boolean = false;
   markerLoaded: boolean = false;
+  polluantsStationClicked: Polluant[];
 
-  //contient les infos de notre carte
+  centerMapOnInit: LatLng;
+  overlayHidden: boolean = true;
+
+  //contient notre carte
   googleMap: GoogleMap;
+
+
   constructor(public alertController: AlertController,
     public actionCtrl: ActionSheetController,
     private platform: Platform, private mapService: MapService) {
@@ -37,29 +44,48 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   //Erreur de récupération des données de station
   ngOnInit() {
-    //Depuis Jeff
-    //recuperer chaque station
-    //pour chaque station ajouter un marker sur la map
+
+
     return this.mapService.getAllStation()
 
+      //recuperer chaque station
       .pipe(
         map(stationServeur => {
           stationServeur.forEach(station => {
             this.stations.push(new Station(station));
-            //console.log( station );
+            console.log(station);
           })
           return this.stations;
         }),
       )
 
+      //pour chaque station ajouter un marker sur la map
       .subscribe(
         listeStationRecues => {
-          this.putMarkers()
+          this.stations.forEach(station => {
+
+            let marker: Marker = this.googleMap.addMarkerSync({
+              title: station.id + " - " + station.nomCommune,
+              //icon: 'blue',
+              //animation: 'DROP',
+              position: {
+                lat: station.latitude,
+                lng: station.longitude
+              }
+            });
+
+            marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(value => {
+              this.viewDataMarker(marker);
+            });
+
+          },
+
+
+          )
         },
         error => console.log(error)
       )
   }
-
 
 
   /**
@@ -75,19 +101,24 @@ export class MapComponent implements OnInit, AfterViewInit {
     // je crée ma carte ici : je stock ici dans map_canvas (je html): qui est mon id html dans le DOM
     this.googleMap = GoogleMaps.create('map_canvas');
     this.googleMap.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
-      const coordinates: LatLng = new LatLng(43.6600980666535, 3.035913988993468);
-      const coordinates2: LatLng = new LatLng(48.856614, 2.3522219);
 
-      this.googleMap.setCameraTarget(coordinates);
-      this.googleMap.setCameraZoom(7);
-      //       this.googleMap = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      // this.addMarker(this.map);
-      // Ajout de Markeur manuel
-      this.googleMap.addMarker({
-        position: coordinates2,
-        Map,
-        title: "Hello World!",
+      this.googleMap.getMyLocation().then(location => {
+        this.centerMapOnInit = location.latLng;
+        let coordinates: LatLng = new LatLng(43.6600980666535, 3.035913988993468);
+
+        if (!!this.centerMapOnInit) {
+          coordinates = this.centerMapOnInit;
+        }
+
+        console.log("center" + this.centerMapOnInit);
+
+        //const coordinates: LatLng = this.centerMapOnInit;
+        this.googleMap.setCameraTarget(coordinates);
+        this.googleMap.setCameraZoom(12);
       });
+
+
+
     });
 
   }
@@ -143,7 +174,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Changement de la vue
+   * Changement de la vue ( mode de map)
    */
   async mapOptions() {
     const actionSheet = await this.actionCtrl.create({
@@ -176,16 +207,16 @@ export class MapComponent implements OnInit, AfterViewInit {
     await actionSheet.present();
   }
 
-  // Depuis Jeff
-  putMarkers() {
-    console.log("coucou")
-    var bounds = [];
-    var markers = this.stations.map(
-      function (station) {
-        var positionMarker = { lng: station.longitude, lat: station.latitude };
-        bounds.push(positionMarker);
-        return () => this.googleMap.addMarker(station);
-      });
+  viewDataMarker(marker: Marker) {
+    let idStationMarker: number = parseInt(marker.getTitle().slice(0, 2));
+    console.log("Station clicked :" + idStationMarker);
+    this.mapService.getStation(idStationMarker).subscribe(stationFromBack => {
+      console.log(stationFromBack);
+      this.polluantsStationClicked = stationFromBack;
+      this.isMarkerClicked = true;
+      this.hideOverlay();
+    }
+    )
   }
 
   /**Ajout de localisation instantané */
@@ -204,5 +235,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   //     }
   //   });
   // });
+
+  public hideOverlay() {
+    this.overlayHidden = false;
+}
 
 }
