@@ -30,7 +30,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   constructor(public alertController: AlertController,
     public actionCtrl: ActionSheetController,
     private platform: Platform, private mapService: MapService,
-    private cdf : ChangeDetectorRef ) {
+    private cdf: ChangeDetectorRef) {
 
   }
 
@@ -44,7 +44,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         map(stationServeur => {
           stationServeur.forEach(station => {
             this.stations.push(new Station(station));
-            console.log(station);
+            //console.log(station);
           })
           return this.stations;
         }),
@@ -101,7 +101,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           coordinates = this.centerMapOnInit;
         }
 
-        console.log("center" + this.centerMapOnInit);
+        //console.log("center" + this.centerMapOnInit);
 
         this.googleMap.setCameraTarget(coordinates);
         this.googleMap.setCameraZoom(12);
@@ -114,60 +114,25 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     });
 
+    const coordinatesMtp = new LatLng(43.6074855, 3.8992668);
+    this.googleMap.addMarker({
+      position: coordinatesMtp,
+      Map,
+      title: "Marker Test Mockup",
+    }).then(marker => {
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(value => {
+        this.viewDataMarkerMockup();
+      });
+    });
+
   }
 
   ngAfterViewInit() {
     this.platform.ready().then(() => this.loadMap());
   }
 
-
   /**
-   * Test ajout de Markeur de géolocalisation : Titre du lieu ou on est / Choix de lieu / à revoir 
-   */
-  placeMarker(markerTitle: string) {
-    const marker: Marker = this.googleMap.addMarkerSync({
-      title: markerTitle,
-      icon: 'blue',
-      animation: 'DROP',
-      position: this.googleMap.getCameraPosition().target
-    });
-  }
-
-  /**
-   * ajout de Markeur via formulaire
-   */
-  async addMarkerLieu() {
-    const alert = await this.alertController.create({
-      header: 'Ajouter un marqueur',
-      inputs: [
-        {
-          name: 'title',
-          type: 'text',
-          placeholder: 'Le titre'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ajouter',
-          handler: data => {
-            console.log('Titre: ' + data.title);
-            this.placeMarker(data.title);
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  /**
-   * Changement de la vue ( mode de map)
+   * Changement de la vue (mode de map)
    */
   async mapOptions() {
     const actionSheet = await this.actionCtrl.create({
@@ -200,9 +165,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     await actionSheet.present();
   }
 
+  //afficher les polluants d'une station
   viewDataMarker(marker: Marker) {
     let idStationMarker: number = parseInt(marker.getTitle().slice(0, 2));
-    console.log("Station clicked :" + idStationMarker);
+    //console.log("Station clicked :" + idStationMarker);
     this.mapService.getStation(idStationMarker).subscribe(stationFromBack => {
       console.log(stationFromBack);
       this.polluantsStationClicked = stationFromBack;
@@ -212,23 +178,35 @@ export class MapComponent implements OnInit, AfterViewInit {
     )
   }
 
-  /**Ajout de localisation instantané */
-  // // Get the current device location "without map"
-  // var option = {
-  //   enableHighAccuracy: true // use GPS as much as possible
-  // };
-  // this.plugin.google.maps.LocationService.getMyLocation(option, function (location) {
+  viewDataMarkerMockup() {
+    this.polluantsStationClicked = [
+      {
+        dateDebut: new Date("2021-02-03T09:00:00"),
+        dateFin: new Date("2021-01-23T23:00:00"),
+        nom: "NO",
+        unite: "horaire",
+        valeur: 0.2
+      },
+      {
+        dateDebut: new Date("2021-02-03T09:00:00"),
+        dateFin: new Date("2021-01-23T23:00:00"),
+        nom: "NOX",
+        unite: "horaire",
+        valeur: 3
+      },
+      {
+        dateDebut: new Date("2021-02-03T09:00:00"),
+        dateFin: new Date("2021-01-23T23:00:00"),
+        nom: "O2",
+        unite: "horaire",
+        valeur: 5
+      }
+    ]
+    this.isMarkerClicked = true;
+    this.showOverlay();
+  }
 
-  //   // Create a map with the device location
-  //   var mapDiv = document.getElementById('map_canvas');
-  //   var map = this.plugin.google.maps.Map.getMap(mapDiv, {
-  //     'camera': {
-  //       target: location.latLng,
-  //       zoom: 16
-  //     }
-  //   });
-  // });
-
+  //Gérer l'affichage de l'overlay contenant 
   public showOverlay() {
     this.overlayHidden = false;
     this.cdf.detectChanges();
