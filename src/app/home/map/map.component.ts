@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, GoogleMapOptions, Marker, MarkerOptions, GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 import { ActionSheetController, Platform, AlertController } from '@ionic/angular';
 import { MapService } from './core/map.service';
@@ -14,37 +14,28 @@ import { Polluant } from './core/polluant.model'
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  // // Pour teter avec objet
-  // ville = [
-  //   {
-  //     position: { lng: 43.6600980666535, lat: 3.035913988993468 },
-  //     title: "Montpellier"
-  //   }
-  // ];
 
-  // Depuis Jeff
   public stations: Station[] = [];
-  markers: any[] = [];
-  isMarkerClicked: boolean = false;
-  markerLoaded: boolean = false;
-  polluantsStationClicked: Polluant[];
 
-  centerMapOnInit: LatLng;
   overlayHidden: boolean = true;
 
-  //contient notre carte
+  //contient la carte
   googleMap: GoogleMap;
+  centerMapOnInit: LatLng;
+  isMarkerClicked: boolean = false;
+  polluantsStationClicked: Polluant[];
+  markers: any[] = [];
 
 
   constructor(public alertController: AlertController,
     public actionCtrl: ActionSheetController,
-    private platform: Platform, private mapService: MapService) {
+    private platform: Platform, private mapService: MapService,
+    private cdf : ChangeDetectorRef ) {
 
   }
 
   //Erreur de récupération des données de station
   ngOnInit() {
-
 
     return this.mapService.getAllStation()
 
@@ -112,12 +103,14 @@ export class MapComponent implements OnInit, AfterViewInit {
 
         console.log("center" + this.centerMapOnInit);
 
-        //const coordinates: LatLng = this.centerMapOnInit;
         this.googleMap.setCameraTarget(coordinates);
         this.googleMap.setCameraZoom(12);
       });
 
-
+      this.googleMap.on(GoogleMapsEvent.MAP_DRAG_START).subscribe(() => {
+        console.log("Drag detected");
+        this.hideOverlay()
+      })
 
     });
 
@@ -214,7 +207,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       console.log(stationFromBack);
       this.polluantsStationClicked = stationFromBack;
       this.isMarkerClicked = true;
-      this.hideOverlay();
+      this.showOverlay();
     }
     )
   }
@@ -236,8 +229,14 @@ export class MapComponent implements OnInit, AfterViewInit {
   //   });
   // });
 
-  public hideOverlay() {
+  public showOverlay() {
     this.overlayHidden = false;
-}
+    this.cdf.detectChanges();
+  }
+
+  public hideOverlay() {
+    this.overlayHidden = true;
+    this.cdf.detectChanges(); // Force le rechargement de template by Angular
+  }
 
 }

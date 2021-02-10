@@ -8,9 +8,9 @@ export class AppComponent {
   public appPages = [
     // { title: 'Map', url: '/home/map', icon: 'locate' }
     { title: 'Map', url: '/home/map', icon: 'locate' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Favoris', url: '/folder/Trash', icon: 'star' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    // { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+    // { title: 'Favoris', url: '/folder/Trash', icon: 'star' },
+    // { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
   constructor() { }
 }
