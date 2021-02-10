@@ -1,14 +1,43 @@
-<!-- Nav bar on -->
 <ion-header [translucent]="true">
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Carte interactive</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Carte interactive</ion-title>
+    </ion-toolbar>
 </ion-header>
-<!-- Nav bar off -->
 
 <ion-content [fullscreen]="true">
-    <div id="map_canvas">TEST</div>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Map</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div id="map_canvas"></div>
+
+    <div class="butonOption">
+        <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+            <ion-fab-button color="sucess" (click)="mapOptions()">
+                <ion-icon name="map"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </div>
 </ion-content>
+
+<div class="my-overlay" padding [hidden]="overlayHidden">
+    <ion-card *ngIf="isMarkerClicked">
+        <ion-list-header>
+            <ion-label><b>Polluant</b></ion-label>
+            <ion-label><b>Valeur</b></ion-label>
+            <ion-label><b>Date Relevé</b></ion-label>
+        </ion-list-header>
+        <ion-list>
+            <ion-item *ngFor="let polluant of this.polluantsStationClicked">
+                <ion-label>{{polluant.nom}}</ion-label>
+                <ion-label>{{polluant.valeur}}</ion-label>
+                <ion-label>{{polluant.dateFin}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</div>

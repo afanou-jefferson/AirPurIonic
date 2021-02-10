@@ -1,7 +1,3 @@
-// export const environment = {
-//   production: true
-// };
-
 import { config } from "./common";
 
 export const environment = Object.assign({
@@ -10,3 +6,8 @@ export const environment = Object.assign({
 }, 
   config
 );
+
+
+// export const environment = {
+//   production: true
+// };
