@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 @NgModule({
   declarations: [MapComponent],
+
   imports: [
     CommonModule,
     IonicModule,
