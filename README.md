@@ -38,7 +38,7 @@ Any licences are needed to use or work on it. This is an open source application
 - Show informations when you clicked on marker
 - Hide informations when you're dragging
 - Change the map type
-- Offline Mockup Marker for testPurpose without the back-end.
+- Offline Mockup Marker for tests purposes without the back-end.
 
 
 **Please support this activity.
