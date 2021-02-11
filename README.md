@@ -41,4 +41,4 @@ Any licences are needed to use or work on it. This is an open source application
 
 
 **Please support this activity.
-In order to keep this project as free, please consider to donate little amount for this project.
+In order to keep this project as free, please consider to donate little amount for this project.**
