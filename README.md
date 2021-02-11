@@ -37,7 +37,7 @@ Any licences are needed to use or work on it. This is an open source application
 - Map focus on mobile eolocalisation
 - Show informations when you clicked on marker
 - Hide informations when you're dragging
-- Change de map type
+- Change the map type
 
 
 **Please support this activity.
