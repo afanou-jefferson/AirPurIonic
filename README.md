@@ -11,7 +11,7 @@ Local: The GoogleMap pluggin is only available with : ionic cordova run browser
 
 We're three to work on the project. We're working for the same compagny : Oxalis/RD services
 - SAMB Moussa
-- AFFANOU JEFF
+- AFANOU Jefferson
 - TEIXEIRA Jordan
 
 **IV. License**
