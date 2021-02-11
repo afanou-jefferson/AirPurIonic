@@ -19,12 +19,12 @@ We're three to work on the project. We're working for the same compagny : Oxalis
 Any licences are needed to use or work on it. This is an open source application. Welcome !
 
 **V. API**
-  Atmo-Occitanie : https://www.atmo-occitanie.org/
-	To fetch weather forecast and quality air indicators
+  - Atmo-Occitanie : https://www.atmo-occitanie.org/
+	  To fetch weather forecast and quality air indicators
 
-  Google Map: Allow to use a cross-platform map. Need a billing account.
+  - Google Map: Allow to use a cross-platform map. Need a billing account.
   
-  INSEE: To fetch size of populations
+  - INSEE: To fetch size of populations
 
 **VI. Technologies**
   - JRE: 1.8.*
