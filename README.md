@@ -24,7 +24,7 @@ Any licences are needed to use or work on it. This is an open source application
 
   - Google Map: Allow to use a cross-platform map. Need a billing account.
   
-  - INSEE: To fetch size of populations
+  - INSEE: To fetch size of populations and GPS coordinates of cities
 
 **VI. Technologies**
   - JRE: 1.8.*
