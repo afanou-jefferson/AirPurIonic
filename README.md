@@ -34,10 +34,11 @@ Any licences are needed to use or work on it. This is an open source application
   
 **VII. Features**
 - GoogleMap
-- Map focus on mobile eolocalisation
+- Map focus on mobile geolocalisation
 - Show informations when you clicked on marker
 - Hide informations when you're dragging
 - Change the map type
+- Offline Mockup Marker for testPurpose without the back-end.
 
 
 **Please support this activity.
