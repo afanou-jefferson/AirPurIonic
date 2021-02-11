@@ -12,7 +12,7 @@ Local: The GoogleMap pluggin is only available with : ionic cordova run browser
 We're three to work on the project. We're working for the same compagny : Oxalis/RD services
 - SAMB Moussa
 - AFFANOU JEFF
--TEIXEIRA Jordan
+- TEIXEIRA Jordan
 
 **IV. License**
 
@@ -27,10 +27,10 @@ Any licences are needed to use or work on it. This is an open source application
   INSEE: To fetch size of populations
 
 **VI. Technologies**
-  JRE: 1.8.*
-  Angular CLI: 11.1.2
-  Cordova: 10.0.0
-  Ionic CLI: 10.0.0
+  - JRE: 1.8.*
+  - Angular CLI: 11.1.2
+  - Cordova: 10.0.0
+  - Ionic CLI: 10.0.0
   
 **VII. Features**
 Map Marker: Markers are given informations about a city's areas
