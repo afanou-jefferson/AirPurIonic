@@ -5,8 +5,8 @@ This is a mobile application named AirPur. It is allowing to have a global visio
 **II. Start**
 
 To use AirPur, you need to have one of these platforms : Web Browser, IOS, Android and download it on the store.
-Local: The GoogleMap pluggin is only available with : ionic cordova run browser
-
+Local: The GoogleMap pluggin is only available with : ionic cordova run browser / ionic cordova run android --device
+/
 **III. Authors**
 
 We're three to work on the project. We're working for the same compagny : Oxalis/RD services
