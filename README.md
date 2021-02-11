@@ -33,7 +33,11 @@ Any licences are needed to use or work on it. This is an open source application
   - Ionic CLI: 10.0.0
   
 **VII. Features**
-- Map Marker: Markers are given informations about a city's areas
+- GoogleMap
+- Map focus on mobile eolocalisation
+- Show informations when you clicked on marker
+- Hide informations when you're dragging
+- Change de map type
 
 
 **Please support this activity.
