@@ -33,7 +33,7 @@ Any licences are needed to use or work on it. This is an open source application
   - Ionic CLI: 10.0.0
   
 **VII. Features**
-Map Marker: Markers are given informations about a city's areas
+- Map Marker: Markers are given informations about a city's areas
 
 
 **Please support this activity.
